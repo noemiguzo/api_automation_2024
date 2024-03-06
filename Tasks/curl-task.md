@@ -6,8 +6,8 @@ export api_key=live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1Cx
 
 ## Getting Images
 
-
  - curl https://api.thecatapi.com/v1/images/search?api_key=$api_key -v  -H 'authority: api.thecatapi.com' -v
+
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl https://api.thecatapi.com/v1/images/search?api_key=$api_key -v  -H 'authority: api.thecatapi.com' -v
 *   Trying 192.178.49.19:443...
 * TCP_NODELAY set
@@ -68,8 +68,10 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl https://api.thecatapi.com/v1/image
 [{"id":"4id","url":"https://cdn2.thecatapi.com/images/4id.gif","width":241,"height":300}]noemi@NGUZMANO-DH01:~/autosetup/ts-test$ 
 
 ## GET favoutires
+
  - curl --location 'https://api.thecatapi.com/v1/favourites' --header 'Content-Type: application/json' --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' 
-oemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.com/v1/favourites' --header 'Content-Type: application/json' --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' -v
+
+noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.com/v1/favourites' --header 'Content-Type: application/json' --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' -v
 *   Trying 192.178.49.19:443...
 * TCP_NODELAY set
 * Connected to api.thecatapi.com (192.178.49.19) port 443 (#0)
@@ -131,6 +133,7 @@ oemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.c
 []
 
 ## POST favoutites
+
  - curl --location 'https://api.thecatapi.com/v1/favourites'  --header 'Content-Type: application/json'  --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' --data '{"image_id":"3pc",	"sub_id": "my-user-789"}'
 
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.com/v1/favourites'  --header 'Content-Type: application/json'  --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' --data '{"image_id":"3pc","sub_id": "my-user-789"}' -v
@@ -197,6 +200,7 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.
 {"message":"SUCCESS","id":232447732}
 
 ## DELETE favourites
+
 - curl --location --request DELETE 'https://api.thecatapi.com/v1/favourites/232447732' --header 'Content-Type: application/json' --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM'
 
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location --request DELETE 'https://api.thecatapi.com/v1/favourites/232447732' --header 'Content-Type: application/json' --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' -v
@@ -261,6 +265,7 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location --request DELETE 'https
 {"message":"SUCCESS"}
 
 ## POST votes
+
 - curl --location 'https://api.thecatapi.com/v1/votes' --header 'Content-Type: application/json' --header 'x-api-key: apikey' --data '{"image_id":"3pc", "sub_id": "891234", "value":1}' -v
 
 
@@ -328,10 +333,76 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.
 * Connection #0 to host api.thecatapi.com left intact
 {"message":"SUCCESS","id":1165604,"image_id":"3pc","sub_id":"891234","value":1,"country_code":"US"}
 
-**Negative tests**
-## GET votes without API-key
+## POST votes - edit vote  'Down' Vote with -1
 
-##bad image_id
+- curl --location 'https://api.thecatapi.com/v1/votes' --header 'Content-Type: application/json' --header 'x-api-key: apikey' --data '{"image_id":"3pc", "sub_id": "891234", "value":-1}' -v
+
+noemi@NGUZMANO-DH01:~/autoPR/ts-test$ curl  'https://api.thecatapi.com/v1/votes' --header 'Content-Type: application/json' --header "x-api-key: $api_key" --data '{"image_id":"3pc", "sub_id": "891234", "value":-1}' -v
+*   Trying 142.251.0.121:443...
+* TCP_NODELAY set
+* Connected to api.thecatapi.com (142.251.0.121) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=api.thecatapi.com
+*  start date: Feb  7 10:38:33 2024 GMT
+*  expire date: May  7 11:24:42 2024 GMT
+*  subjectAltName: host "api.thecatapi.com" matched cert's "api.thecatapi.com"
+*  issuer: C=US; O=Google Trust Services LLC; CN=GTS CA 1D4
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x7ffff07a09c0)
+> POST /v1/votes HTTP/2
+> Host: api.thecatapi.com
+> user-agent: curl/7.68.0
+> accept: */*
+> content-type: application/json
+> x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM
+> content-length: 50
+> 
+* We are completely uploaded and fine
+* Connection state changed (MAX_CONCURRENT_STREAMS == 100)!
+< HTTP/2 201 
+< x-dns-prefetch-control: off
+< x-frame-options: SAMEORIGIN
+< strict-transport-security: max-age=15552000; includeSubDomains
+< x-download-options: noopen
+< x-content-type-options: nosniff
+< x-xss-protection: 1; mode=block
+< vary: Origin
+< retry-after-seconds: 60
+< ratelimit-limit: 120
+< ratelimit-remaining: 119
+< ratelimit-consumed: 1
+< ratelimit-reset: 2024-03-06T13:08:09.036Z
+< content-type: application/json; charset=utf-8
+< x-response-time: 881ms
+< x-cloud-trace-context: a5c167209f8d75ac468430cad12e88aa
+< date: Wed, 06 Mar 2024 13:07:09 GMT
+< server: Google Frontend
+< content-length: 100
+< 
+* Connection #0 to host api.thecatapi.com left intact
+{"message":"SUCCESS","id":1165693,"image_id":"3pc","sub_id":"891234","value":-1,"country_code":"BO"}
+
+**Negative tests**
+## 1. GET votes without API-key
+
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl  "https://api.thecatapi.com/v1/votes?limit=10&order=DESC" -v 
 *   Trying 192.178.48.243:443...
 * TCP_NODELAY set
@@ -378,7 +449,8 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl  "https://api.thecatapi.com/v1/vot
 * Connection #0 to host api.thecatapi.com left intact
 AUTHENTICATION_ERROR - you need to send your API Key as the 'x-api-key' header
 
-## GET image invalid image_id
+## 2. GET image invalid image_id
+
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl https://api.thecatapi.com/v1/images/3pc_badid?api_key=$api_key -v  
 *   Trying 192.178.48.243:443...
 * TCP_NODELAY set
@@ -425,7 +497,8 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl https://api.thecatapi.com/v1/image
 * Connection #0 to host api.thecatapi.com left intact
 Couldn't find an image matching the passed 'id' of 3pc_badid
 
-## POST favourites duplicate sub_id
+## 3. POST favourites duplicate sub_id
+
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.com/v1/favourites'  --header 'Content-Type: application/json'  --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' --data '{"image_id":"3pc","sub_id": "my-user-789"}' -v
 *   Trying 192.178.48.243:443...
 * TCP_NODELAY set
@@ -476,7 +549,7 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.
 * Connection #0 to host api.thecatapi.com left intact
 DUPLICATE_FAVOURITE - favourites are unique for account + image_id + sub_idnoemi@NGUZMANO-DH01:~/autosetup/ts-test$ 
 
-## DELETE favourites bad id
+## 4. DELETE favourites bad id
 
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location --request DELETE 'https://api.thecatapi.com/v1/favourites/232447732' --header 'Content-Type: application/json' --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' -v
 *   Trying 192.178.49.19:443...
@@ -526,7 +599,8 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location --request DELETE 'https
 * Connection #0 to host api.thecatapi.com left intact
 IVALID_ACCOUNT
 
-## POST favourites no sent image_id [image_id is required]
+## 5. POST favourites no sent image_id [image_id is required]
+
 noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.com/v1/favourites'  --header 'Content-Type: application/json'  --header 'x-api-key: live_q4NhK64bHnooCcxXqBG2mhoRRThymieDah9FNqONycSezH9SC7HvADbBa1CxqTOM' --data '{"sub_id": "my-user-789"}' -v
 *   Trying 192.178.49.19:443...
 * TCP_NODELAY set
@@ -578,4 +652,4 @@ noemi@NGUZMANO-DH01:~/autosetup/ts-test$ curl --location 'https://api.thecatapi.
 "image_id" is required
 
 
-**thanks
+**thanks**
